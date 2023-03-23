@@ -20,3 +20,7 @@ print(get_full_derivative(mol, cart_derivatives)) # Вернет список в
 cur_coord = Dihedral(0, 1, 2, 3)
 print(get_current_derivative(mol, cart_derivatives, cur_coord)) # Вернет производную по двугранному углу 0-1-2-3
 ```
+
+### Requirements
+* numpy
+* rdkit
