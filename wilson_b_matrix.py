@@ -487,4 +487,4 @@ def get_current_derivative(mol : Chem.rdchem.Mol,
 def get_full_derivative(mol : Chem.rdchem.Mol,
                         cart_grad : vec3d) -> vec3d:
     int_coords, int_grad = gradient_to_internal(mol, cart_grad)
-    return int_grad
+    return int_coords, int_grad
