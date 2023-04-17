@@ -488,3 +488,26 @@ def get_full_derivative(mol : Chem.rdchem.Mol,
                         cart_grad : vec3d) -> vec3d:
     int_coords, int_grad = gradient_to_internal(mol, cart_grad)
     return int_coords, int_grad
+
+def parse_grads_from_grads_file(num_of_atoms : int,
+                                grads_filename : str = "gradient",
+                                soft : str = 'xtb') -> np.ndarray:
+    """
+        Read gradinets from file, returns ['num_of_atoms', 3] numpy array with
+        cartesian energy derivatives
+    """
+    res = np.zeros((num_of_atoms, 3))
+
+    if soft == 'xtb':
+        grads = []
+        with open(grads_filename, 'r') as file:
+            grads = [line[:-1] for line in file][(2 + num_of_atoms):-1]
+        res = np.array(list(map(lambda s: list(map(float, s.split())), grads)))
+
+    else:
+        raise NotImplementedError(
+            "Only xtb supports now!"
+        )
+
+    return res
+
